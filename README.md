@@ -16,3 +16,4 @@ problem 1:
 The problem I faced here that The function that I made having the problem that I mark attendance twice for coaching and school both and even for one attendance, two rows created.
 
 solution 1:
+I solved this problem by removing three function. I removed individual school and coaching attendance marking function and that's exisiting check, and created a date of attendance, where I am checking todays exisiting attendance and created another function which are taking both school and coaching status and marked together.
