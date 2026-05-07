@@ -1,7 +1,7 @@
 from datetime import date
 from database.conn import get_db
 from database.models import Attendance
-from sqlalchemy import and_
+from sqlalchemy import and_, null
 
 
 # db=get_db()
@@ -37,11 +37,35 @@ class AttendanceManager:
 
             print(f"your school attendance has been marked successfully.\nschool:{school}\ncoaching:{coaching}")
     
-    
-    def main_func(self, school, coaching):
-        print("Hey boss! I am ATLAS, How are you?")
+    def status_format(self, school_status, coaching_status):
 
+        school=None
+        coaching=None
+
+        # NOTE: We didn't used elif, because elif is run when previous condition is don't matched, and here we want that I will check each and every condtion even though, it matches or not.
+
+        if school_status == 1:
+            school=True
+        
+        if coaching_status == 1:
+            coaching=True
+
+        if school_status == 2:
+            school=False        
+        
+        if coaching_status == 2:
+            coaching=False       
+        
         self.mark_attendance(school, coaching)
-# manager=AttendanceManager()
-# manager.main_func(True, True)
+    def main_func(self):
+        print("Hey boss! I am ATLAS, How are you?")
+        print('Command Instruction:\nPresent or Absent: 1 or 2 and holiday: 3')
+        
+        school_status = int(input("Your school status:\n"))
+        coaching_status= int(input("Your coaching status:\n"))
+
+        self.status_format(school_status, coaching_status)
+
+manager=AttendanceManager()
+manager.main_func()
 
