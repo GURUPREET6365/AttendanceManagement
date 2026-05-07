@@ -17,3 +17,7 @@ The problem I faced here that The function that I made having the problem that I
 
 solution 1:
 I solved this problem by removing three function. I removed individual school and coaching attendance marking function and that's exisiting check, and created a date of attendance, where I am checking todays exisiting attendance and created another function which are taking both school and coaching status and marked together.
+
+
+problem 2:
+now it is working and I started running the program, but the problem is, I want to automate it by schedule the python program. I setup that, but the problem is, I was directly editing the file to run, now I want to make that terminal will ask about the status when I run the program.
