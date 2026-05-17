@@ -60,6 +60,17 @@ class AttendanceManager:
         self.mark_attendance(school, coaching)
 
 
+    def is_att_marked(self):
+        date_today = self.date_today
+        db = self.db
+
+        att_check = db.query(Attendance).filter(Attendance.attendance_date == date_today).first()
+        if att_check:
+            return False
+        else:
+            return True
+
+
     def day_checker(self):
         day_name = datetime.now().strftime("%A")
         # day_name = datetime.now()
@@ -67,18 +78,24 @@ class AttendanceManager:
             return False
 
         else:
-            return True
+            mark_att = self.is_att_marked()
+            if mark_att:
+                return True
+            else:
+                return False
+
     
     def main_func(self):
         print("Hey boss! I am ATLAS, How are you?")
         print('Command Instruction:\nPresent or Absent: 1 or 2 and holiday: 3')
         
-        school_status = int(input("Your school status:\n"))
-        coaching_status= int(input("Your coaching status:\n"))
-
         day_check=self.day_checker()
         if day_check:
+            school_status = int(input("Your school status:\n"))
+            coaching_status= int(input("Your coaching status:\n"))
             self.status_format(school_status, coaching_status)
+        
+
             
 
 manager=AttendanceManager()
