@@ -2,6 +2,7 @@ from datetime import date
 from database.conn import get_db
 from database.models import Attendance
 from sqlalchemy import and_, null
+from datetime import datetime
 
 
 # db=get_db()
@@ -57,6 +58,17 @@ class AttendanceManager:
             coaching=False       
         
         self.mark_attendance(school, coaching)
+
+
+    def day_checker(self):
+        day_name = datetime.now().strftime("%A")
+        # day_name = datetime.now()
+        if day_name == "Sunday":
+            return False
+
+        else:
+            return True
+    
     def main_func(self):
         print("Hey boss! I am ATLAS, How are you?")
         print('Command Instruction:\nPresent or Absent: 1 or 2 and holiday: 3')
@@ -64,8 +76,12 @@ class AttendanceManager:
         school_status = int(input("Your school status:\n"))
         coaching_status= int(input("Your coaching status:\n"))
 
-        self.status_format(school_status, coaching_status)
+        day_check=self.day_checker()
+        if day_check:
+            self.status_format(school_status, coaching_status)
+            
 
 manager=AttendanceManager()
 manager.main_func()
+
 
