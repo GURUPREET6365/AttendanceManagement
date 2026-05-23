@@ -21,3 +21,10 @@ I solved this problem by removing three function. I removed individual school an
 
 problem 2:
 now it is working and I started running the program, but the problem is, I want to automate it by schedule the python program. I setup that, but the problem is, I was directly editing the file to run, now I want to make that terminal will ask about the status when I run the program.
+
+solution 2:
+I used task scheduler, where I automated It by running the windows task scheduler, and run the program using .bat file at the startup of the system.
+
+
+problem 3:
+I faced the problem that it runs also in sunday and the biggest problem is sometime, I forget to open the laptop, then that day attendance is missed.
