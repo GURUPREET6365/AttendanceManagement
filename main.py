@@ -14,7 +14,8 @@ class AttendanceManager:
         self.db=get_db()
         self.attendance_date = date.today()
         self.date_today = date.today()
-        print('Command Instruction:\n   Present: 1\n   Absent: 2\n   Holiday: 3\n')
+        self.new_day = None
+        print('Command Instruction:\n   Present: 1\n   Absent: 2\n   Holiday: 3\n NOTE: Just type help to get other options.')
     
 
     def mark_attendance(self, school:bool, coaching:bool):
@@ -98,24 +99,27 @@ class AttendanceManager:
         if last_att is None:
             print('Your database has no data.....')
             self.direct_att_mark()
-        last_date = last_att.attendance_date
-        today_date = self.date_today
-
-        date_gap = (today_date-last_date).days
-        if date_gap >= 1:
-            for i in range(1, date_gap+1):
-                self.new_date = last_date+timedelta(days=i)
-                new_day = self.new_date.strftime("%A")
-                self.attendance_date = self.new_date
-                day_check=self.day_checker(new_day)
-                if day_check:
-                    print(f"Your attendance of date {f"{self.new_date} and {new_day}" if (today_date-self.new_date).days > 0 else "Today"}")
-                    self.user_input()
+        
         else:
-            day_check=self.day_checker(new_day)
-            if day_check:
-                print("Your Todays status.")
-                self.user_input()
+
+            last_date = last_att.attendance_date
+            today_date = self.date_today
+
+            date_gap = (today_date-last_date).days
+            if date_gap >= 1:
+                for i in range(1, date_gap+1):
+                    self.new_date = last_date+timedelta(days=i)
+                    self.new_day = self.new_date.strftime("%A")
+                    self.attendance_date = self.new_date
+                    day_check=self.day_checker(self.new_day)
+                    if day_check:
+                        print(f"Your attendance of date {f"{self.new_date} and {self.new_day}" if (today_date-self.new_date).days > 0 else "Today"}")
+                        self.user_input()
+            else:
+                day_check=self.day_checker(self.new_day)
+                if day_check:
+                    print("Your Todays status.")
+                    self.user_input()
     
     def user_input(self):
         
